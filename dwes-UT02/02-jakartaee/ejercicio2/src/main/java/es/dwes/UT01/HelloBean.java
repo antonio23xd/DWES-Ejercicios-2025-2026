@@ -17,15 +17,36 @@ public class HelloBean implements Serializable {
     //Como en el enunciado no se especifica el número de usuarios a crear, he creado una lista de 5 usuarios
     //Creo los usuarios
     public List<Usuario> getUsuarios() {
-        Usuario usuario1 = new Usuario("Juan", "García", "12345678A", "", 30, Map.of("Enero", 50.0, "Febrero", 75.0, "Marzo", 60.0, "Abril", 80.0, "Mayo", 90.0, "Junio", 0.0));
-        Usuario usuario2 = new Usuario("María", "López", "87654321B", "", 25, Map.of("Enero", 40.0, "Febrero", 65.0, "Marzo", 0.0, "Abril", 85.0, "Mayo", 95.0, "Junio", 60.0));
-        Usuario usuario3 = new Usuario("Carlos", "Martínez", "11223334C", "", 28, Map.of("Enero", 0.0, "Febrero", 70.0, "Marzo", 75.0, "Abril", 90.0, "Mayo", 100.0, "Junio", 65.0));
-        Usuario usuario4 = new Usuario("Ana", "Sánchez", "44332211D", "", 32, Map.of("Enero", 60.0, "Febrero", 80.0, "Marzo", 85.0, "Abril", 95.0, "Mayo", 110.0, "Junio", 70.0));
-        Usuario usuario5 = new Usuario("Luis", "Rodríguez", "55667788E", "", 27, Map.of("Enero", 45.0, "Febrero", 60.0, "Marzo", 65.0, "Abril", 75.0, "Mayo", 85.0, "Junio", 50.0));  
+        Usuario usuario1 = new Usuario("Juan", "García", "12345678A", "juan.gar@gmail.com", 30, Map.of("Enero", 50.0, "Febrero", 75.0, "Marzo", 60.0, "Abril", 80.0, "Mayo", 90.0, "Junio", 0.0));
+        Usuario usuario2 = new Usuario("María", "López", "87654321B", "marilo21@gmail.com", 25, Map.of("Enero", 40.0, "Febrero", 65.0, "Marzo", 0.0, "Abril", 85.0, "Mayo", 95.0, "Junio", 60.0));
+        Usuario usuario3 = new Usuario("Carlos", "Martínez", "11223334C", "martincarlos_123@gmail.es", 28, Map.of("Enero", 0.0, "Febrero", 70.0, "Marzo", 75.0, "Abril", 90.0, "Mayo", 100.0, "Junio", 65.0));
+        Usuario usuario4 = new Usuario("Ana", "Sánchez", "44332211D", "sanchez_ana@gmail.es", 32, Map.of("Enero", 60.0, "Febrero", 80.0, "Marzo", 85.0, "Abril", 95.0, "Mayo", 110.0, "Junio", 70.0));
+        Usuario usuario5 = new Usuario("Luis", "Rodríguez", "55667788E", "rodri_luis@gmail.com", 27, Map.of("Enero", 45.0, "Febrero", 60.0, "Marzo", 65.0, "Abril", 75.0, "Mayo", 85.0, "Junio", 50.0));
+        Usuario usuario6 = new Usuario("Marta", "Ramirez", "43212312G", "martaramirez@gmail.com", 20, Map.of("Enero", 35.0, "Febrero", 0.0, "Marzo", 0.0, "Abril", 0.0, "Mayo", 50.0, "Junio", 0.0));
+        Usuario usuario7 = new Usuario("Manolo", "Ibañez", "77712372H", "manoiba@gmail.com", 23, Map.of("Enero", 0.0, "Febrero", 20.0, "Marzo", 0.0, "Abril", 20.0, "Mayo", 0.0, "Junio", 30.0));  
         //Los guardo en una lista
-        List<Usuario> usuarios = List.of(usuario1, usuario2, usuario3, usuario4, usuario5);
+        List<Usuario> usuarios = List.of(usuario1, usuario2, usuario3, usuario4, usuario5,usuario6,usuario7);
         //Devuelvo la lista de usuarios creada
         return usuarios;
+    }
+
+    //Método para calcular el total pagado por un usuario
+    public double calcularTotalPagado(Map<String, Double> pagos) {
+        double total = 0.0;
+        for (double pago : pagos.values()) {
+            total += pago;
+        }
+        return total;
+    }
+
+    //Método para comprobar si un usuario ha pagado todos los meses
+    public boolean haPagadoTodosLosMeses(Map<String, Double> pagos) {
+        for (double pago : pagos.values()) {
+            if (pago == 0.0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //Codigo que ya estaba    
