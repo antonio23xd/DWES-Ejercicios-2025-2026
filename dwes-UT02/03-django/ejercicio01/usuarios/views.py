@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from usuarios.models import Usuario
+from usuarios.models import Pago, Usuario
 
 # Create your views here.
 from django.http import HttpResponse
@@ -17,15 +17,21 @@ def usuario_view(request):
     }
     """
 
-    html1 = f"""
+    html = """
             <html>
             <head><title>Datos de un Usuario</title></head>
             <body>
                 <h1>Información personal</h1>"""
     
     # Recorro los usuarios
-    for usuario in usuarios:       
-        html2 = f"""
+    for usuario in usuarios:
+        #Obtengo los pagos del usuario
+        pagos = Pago.objects.filter(usuario=usuario)
+        #Creo una variable para almacenar los pagos
+        pagos_str = ""
+        for pago in pagos:
+            pagos_str += f"<li>{pago.mes} - {pago.cantidad}€</li>"
+        html += f"""
                 <!--Para incluir datos que se encuentran en la vista, usamos llaves como se ve a continuación -->
                 <ul>
                     <li>
@@ -34,12 +40,13 @@ def usuario_view(request):
                         <strong>DNI: </strong>{usuario.dni}</br>
                         <strong>Email: </strong>{usuario.email}</br>
                         <strong>Teléfono: </strong>{usuario.telefono}</br>
+                        <strong>Pagos: </strong></br>
+                        <ul>{pagos_str}</ul>
                     </li>
                 </ul>                
-        """
-    html3 = """
+                """
+    html += """
             </body>
             </html>"""
-    htmlfinal = html1 + html2 + html3
 
-    return HttpResponse(htmlfinal)
+    return HttpResponse(html)
