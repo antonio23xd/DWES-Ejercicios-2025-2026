@@ -7,9 +7,9 @@ class Usuario(models.Model):
     dni = models.CharField(max_length=9, unique=True)
     email = models.EmailField()
     telefono = models.IntegerField()    
-
+    edad = models.IntegerField()
     def __str__(self):
-        return f"{self.nombre} {self.apellidos} {self.dni} {self.email} {self.telefono}"
+        return f"{self.nombre} {self.apellidos} {self.dni} {self.email} {self.telefono} {self.edad}"
     
 class Pago(models.Model):    
     mes = models.CharField(max_length=50)

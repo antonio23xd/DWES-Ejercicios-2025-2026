@@ -27,6 +27,8 @@ def usuario_view(request):
     for usuario in usuarios:
         #Obtengo los pagos del usuario
         pagos = Pago.objects.filter(usuario=usuario)
+        #Color verde si > 18, rojo si no
+        color_edad = "green" if usuario.edad > 18 else "red"
         #Creo una variable para almacenar los pagos
         pagos_str = ""
         for pago in pagos:
@@ -40,6 +42,7 @@ def usuario_view(request):
                         <strong>DNI: </strong>{usuario.dni}</br>
                         <strong>Email: </strong>{usuario.email}</br>
                         <strong>Teléfono: </strong>{usuario.telefono}</br>
+                        <strong>Edad: </strong><span style="color:{color_edad}">{usuario.edad}</span></br>
                         <strong>Pagos: </strong></br>
                         <ul>{pagos_str}</ul>
                     </li>
